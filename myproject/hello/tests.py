@@ -33,5 +33,6 @@ class PersonFormTests(TestCase):
         self.assertIn('first_name', form.errors)
         self.assertEqual(form.errors['first_name'], ['This field is required.'])
         self.assertEqual(Person.objects.count(), 0)
+        this is something
 
  
