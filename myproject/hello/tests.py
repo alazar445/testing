@@ -33,6 +33,18 @@ class PersonFormTests(TestCase):
         self.assertIn('first_name', form.errors)
         self.assertEqual(form.errors['first_name'], ['This field is required.'])
         self.assertEqual(Person.objects.count(), 0)
+    def this(self):
+        data = {
+            'first_name': '',  # missing required field
+            'last_name': 'Doe',
+        }
+        response = self.client.post(reverse('person_create'), data)
+        self.assertEqual(response.status_code, 200)
+        form = response.context['form']
+        self.assertFalse(form.is_valid())
+        self.assertIn('first_name', form.errors)
+        self.assertEqual(form.errors['first_name'], ['This field is required.'])
+        self.assertEqual(Person.objects.count(), 0)
         
 
  
