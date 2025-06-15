@@ -34,6 +34,4 @@ class PersonFormTests(TestCase):
         self.assertEqual(form.errors['first_name'], ['This field is required.'])
         self.assertEqual(Person.objects.count(), 0)
 
-    def test_intentional_failure(self):
-        """ This test is supposed to fail to check CI/CD system catches it """
-        self.assertEqual(1 + 1, 3)  # ❌ This will always fail
+ 
