@@ -7,7 +7,7 @@ def person_create(request):
         if form.is_valid():
             form.save()
             return redirect('success')
-        this is to
+        this is to this
     return render(request, 'simpleform/person_form.html', {'form': form})
 
 def success(request):
