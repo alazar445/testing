@@ -15,9 +15,7 @@ class PersonFormTests(TestCase):
             'last_name': 'Doe',
         }
         response = self.client.post(reverse('person_create'), data)
-        # After POST, it redirects to success
         self.assertRedirects(response, reverse('success'))
-        # Check the person was created in DB
         self.assertEqual(Person.objects.count(), 1)
         person = Person.objects.first()
         self.assertEqual(person.first_name, 'John')
@@ -30,16 +28,11 @@ class PersonFormTests(TestCase):
         }
         response = self.client.post(reverse('person_create'), data)
         self.assertEqual(response.status_code, 200)
-
-        # 🧠 Manually extract the form from the response context
         form = response.context['form']
-
-        # ✅ Check the form is invalid
         self.assertFalse(form.is_valid())
-
-        # ✅ Ensure the error is related to 'first_name'
         self.assertIn('first_name', form.errors)
         self.assertEqual(form.errors['first_name'], ['This field is required.'])
-
-        # ✅ Ensure nothing was saved in the DB
         self.assertEqual(Person.objects.count(), 0)
+        
+
+ 
